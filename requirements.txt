@@ -1,0 +1,20 @@
+# Python 3.12. Versions are the ones used for the reported results.
+torch==2.8.0
+transformers==4.57.1
+peft==0.18.1
+bitsandbytes==0.48.1
+accelerate==1.10.1
+datasets==4.2.0
+safetensors==0.8.0
+sentencepiece==0.2.2
+tiktoken==0.14.0
+protobuf==6.33.6
+scikit-learn==1.7.1
+scipy==1.16.1
+numpy==2.5.3
+pandas==2.3.3
+matplotlib==3.10.6
+seaborn==0.13.2
+tqdm==4.67.1
+# step 3 only (labelling with Gemini)
+google-genai
