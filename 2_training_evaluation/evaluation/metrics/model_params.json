@@ -1,0 +1,46 @@
+{
+  "deberta": {
+    "total": 184423682,
+    "trainable": 184423682,
+    "layers": 12,
+    "hidden": 768,
+    "vocab": 128100
+  },
+  "promptguard": {
+    "total": 278810882,
+    "trainable": 278810882,
+    "layers": 12,
+    "hidden": 768,
+    "vocab": 251000
+  },
+  "llamaguard3": {
+    "total": 8030261248,
+    "trainable": 41943040,
+    "layers": 32,
+    "hidden": 4096,
+    "vocab": 128256,
+    "kv_heads": 8,
+    "heads": 32,
+    "intermediate": 14336
+  },
+  "wildguard": {
+    "total": 7248031744,
+    "trainable": 41943040,
+    "layers": 32,
+    "hidden": 4096,
+    "vocab": 32769,
+    "kv_heads": 8,
+    "heads": 32,
+    "intermediate": 14336
+  },
+  "laya": {
+    "total": 421293827,
+    "trainable": 421293827,
+    "encoder": 394781696,
+    "head": 26512131,
+    "layers": 28,
+    "hidden": 1024,
+    "vocab": 50368,
+    "head_layers": 2
+  }
+}

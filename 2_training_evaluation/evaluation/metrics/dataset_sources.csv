@@ -1,0 +1,8 @@
+,Train,Train,Validation,Validation,Test,Test
+,Benign,Malicious,Benign,Malicious,Benign,Malicious
+source_dataset,,,,,,
+xtram,852,1683,148,317,200,400
+arena,893,0,165,0,166,0
+deepset,302,169,40,31,56,58
+advbench,0,352,0,48,0,120
+Total,2047,2204,353,396,422,578

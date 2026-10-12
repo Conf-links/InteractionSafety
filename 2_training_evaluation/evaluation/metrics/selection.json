@@ -1,0 +1,30 @@
+{
+  "rule": {
+    "recall": "max val recall (tolerance 0.02), then max val F1",
+    "f1": "max val F1 (harmful class)",
+    "f1_macro": "max val macro-F1"
+  },
+  "selected": {
+    "recall": {
+      "deberta": "standard",
+      "promptguard": "oversampling",
+      "llamaguard3": "weighted_loss",
+      "wildguard": "oversampling",
+      "laya": "focal_loss"
+    },
+    "f1": {
+      "deberta": "focal_loss",
+      "promptguard": "weighted_oversampling",
+      "llamaguard3": "undersampling",
+      "wildguard": "oversampling",
+      "laya": "weighted_oversampling"
+    },
+    "f1_macro": {
+      "deberta": "focal_loss",
+      "promptguard": "weighted_oversampling",
+      "llamaguard3": "undersampling",
+      "wildguard": "oversampling",
+      "laya": "weighted_oversampling"
+    }
+  }
+}

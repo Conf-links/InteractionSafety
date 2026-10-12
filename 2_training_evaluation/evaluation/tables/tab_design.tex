@@ -1,0 +1,27 @@
+% Design choices and justification (hand-written; kept in tables/ so build_paper.sh copies it)
+\begin{table*}[h]
+\centering\small
+\caption{Design choices and their justification.}
+\label{tab:design}
+\begin{tabular}{p{0.30\textwidth}p{0.64\textwidth}}
+\toprule
+Choice & Justification \\
+\midrule
+Response-centric label & A harmful request answered by a refusal is harmless; deployment needs to catch harmful \emph{compliance}. 94\% of harmful-prompt pairs are benign. \\
+Prompt-grouped train/validation/test splits & The seven responses to a prompt share content; splitting pairs at random would leak prompts into test and inflate scores. No prompt, prompt text or pair is shared across splits. \\
+Resampling on training data only & Validation and test keep the natural 3.6\% harmful rate, so thresholds and metrics reflect deployment conditions. \\
+AUROC and AUPRC as primary metrics & Threshold-free, so comparisons across models, input modes and truncation levels are not confounded by calibration. AUPRC targets the rare class (chance level 0.036); AUROC is unaffected by class balance and widely reported, but optimistic under imbalance, so it is never used alone. \\
+Precision, recall, F1 and macro-F1 & A guard must take binary decisions: recall is the share of harmful outputs caught (the safety cost), precision the share of alarms that are real (the cost of false alarms), F1 balances the two. Macro-F1 also weighs the benign class. Accuracy is not reported (96.4\% for a model that never flags anything). \\
+Own threshold per setting, maximising validation F1 & No arbitrary cost ratio; rules out degenerate thresholds (maximising recall flags everything); exact search over all observed scores; each setting is calibrated on validation inputs of its own form (prompt only, full response, each fine-tuned strategy); test is never used. \\
+Calibrating zero-shot models too & Otherwise part of the gain from fine-tuning would be the gain from tuning a threshold. \\
+Native prompt-only baselines & ``Prompt only'' feeds the prompt alone in each model's own prompt-moderation format, the fairest version of input filtering. \\
+Official formats for zero-shot guards & Tests Llama-Guard-3 and WildGuard as designed; simplified prompts understate them. \\
+Guard score $\sigma(z_{\text{unsafe}}-z_{\text{safe}})$ & Restricted-vocabulary scoring as in Llama Guard; turns a generative guard into a calibratable scalar score. \\
+Strategy selection on validation, recall first, 0.02 tolerance & Missed harmful outputs are the costliest error; the tolerance (about 4--5 of 225 validation positives) avoids selecting on noise; selecting on test would inflate results. \\
+Prompt-clustered bootstrap CIs & 249 harmful test pairs come from 87 prompts; responses to a prompt are correlated, and pair-level resampling would make the intervals about 2$\times$ too narrow. \\
+QLoRA for 7--8B guards, full fine-tuning for encoders & The standard adaptation for each scale: 41.9M trainable parameters (0.5\%) fit on one GPU; encoders are small enough to train fully. \\
+Character-level, prefix-only truncation & Tokenizer-independent and identical for all models; mimics a guard reading a streamed reply. \\
+Fixed full-response threshold in sweeps (appendix) & Shows what a deployed guard does on partial replies; reported only as a secondary view because it mixes lost evidence with score drift. \\
+\bottomrule
+\end{tabular}
+\end{table*}
